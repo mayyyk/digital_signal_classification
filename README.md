@@ -1,1 +1,96 @@
+# Digital Signal Classification
+
+This project demonstrates a neural network-based approach to classify digital signals. It uses feature extraction from raw signal data using Wavelet Transform to classify sounds into different categories. This example classifies sounds of fans and gears.
+
+## Table of Contents
+- [Installation](#installation)
+- [Dataset](#dataset)
+- [Usage](#usage)
+- [Model Architecture](#model-architecture)
+- [Contributing](#contributing)
+- [License](#license)
+
+## Installation
+
+1.  **Clone the repository:**
+    ```bash
+    git clone https://example.com/your-repository.git
+    cd digital_signal_classification
+    ```
+
+2.  **Create and activate a virtual environment:**
+    ```bash
+    python3 -m venv venv
+    source venv/bin/activate
+    ```
+
+3.  **Install the dependencies:**
+    This project requires `graphviz` which is not a Python package. Please install it using your system's package manager.
+
+    On Debian/Ubuntu:
+    ```bash
+    sudo apt-get install graphviz
+    ```
+
+    On MacOS (using Homebrew):
+    ```bash
+    brew install graphviz
+    ```
+
+    Then, install the required Python packages:
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+## Dataset
+
+The dataset consists of `.wav` files located in the `signal_files/` directory. The current dataset contains audio files for two classes:
+*   `fan`
+*   `gear`
+
+The script automatically loads, segments, and processes these files.
+
+## Usage
+
+To train the model and see the evaluation, run the `signal_classification.py` script:
+
+```bash
+python signal_classification.py
+```
+
+The script will:
+1.  Load the `.wav` files from the `signal_files` directory.
+2.  Extract features from the audio signals using Wavelet Transform.
+3.  Train a neural network on the extracted features.
+4.  Evaluate the model and print the accuracy.
+5.  Display plots for data visualization and model performance.
+
+### Jupyter Notebook
+
+For a more interactive experience, you can convert the Python script to a Jupyter Notebook:
+
+```bash
 jupytext --to notebook ./signal_classification.py
+```
+
+This will create a `signal_classification.ipynb` file which you can open in Jupyter Lab or Jupyter Notebook.
+
+## Model Architecture
+
+The model is a simple sequential neural network built with TensorFlow/Keras.
+
+*   **Feature Extraction**: The input to the network is not the raw audio signal. Instead, we perform feature engineering using the Wavelet Transform (`pywt.wavedec`). For each audio segment, we compute the L1 norm, L2 norm, and L-infinity norm of the approximation coefficients at the second level of decomposition. This results in 3 features per segment.
+*   **Neural Network**:
+    *   **Input Layer**: Takes the 3 extracted features.
+    *   **Hidden Layer**: A `Dense` layer with 10 neurons and ReLU activation.
+    *   **Output Layer**: A `Dense` layer with 1 neuron and a sigmoid activation function to output a probability for the binary classification.
+
+The model is compiled with the `adam` optimizer and `binary_crossentropy` loss function.
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a pull request or open an issue.
+
+## License
+
+This project is licensed under the MIT License.
