@@ -6,3 +6,7 @@ tensorflow
 pydot
 graphviz
 scikit-learn
+seaborn
+pandas
+ipykernel
+jupytext
