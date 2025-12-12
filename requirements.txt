@@ -2,3 +2,7 @@ PyWavelets
 numpy 
 matplotlib 
 scipy
+tensorflow
+pydot
+graphviz
+scikit-learn
